@@ -1,0 +1,153 @@
+.NavbarContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 3rem;
+
+    .index {
+        display: flex;
+        gap: 3rem;
+        width: 100%;
+        align-items: center;
+
+        .navbar {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .navbarOptions {
+                display: flex;
+                gap: 3rem;
+                list-style: none;
+            }
+
+            .actions {
+                display: flex;
+                align-items: center;
+                gap: 3rem;
+
+                .searchBox {
+                    background-color: transparent;
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+
+                    @keyframes searchBoxAnimation {
+                        from {
+                            width: 0%;
+                        }
+
+                        to {
+                            width: 100%;
+                        }
+                    }
+
+                    .searchBoxInput {
+                        animation: searchBoxAnimation 0.5s;
+                        border: none;
+                        outline: none;
+                        display: none;
+                        padding: 0.5rem;
+                        border-radius: 1rem;
+                        font-size: 1rem;
+                        background-color: var(--body);
+                        color: var(--text-color);
+                    }
+
+                    .searchBoxInput::placeholder {
+                        color: var(--disable);
+                    }
+
+                    #searchToggle {
+                        display: none;
+                    }
+
+                    #searchToggle:checked~.searchBoxInput {
+                        display: block;
+
+                    }
+
+                    .searchToggleIcon {
+                        cursor: pointer;
+                    }
+                }
+
+                .userAccount {
+                    display: flex;
+                    gap: 1rem;
+                    align-items: center;
+
+                    .userImg {
+                        border-radius: 50%;
+                        width: 3rem;
+                    }
+                }
+            }
+        }
+    }
+
+    .nav-btn {
+        background-color: transparent;
+        border: none;
+        color: var(--text-color);
+        display: none;
+    }
+}
+
+
+
+@media screen and (max-width: 1024px) {
+    .NavbarContainer {
+        .nav-btn {
+            display: block;
+            opacity: 1;
+        }
+
+        .index {
+            .nav-close-btn {
+                position: absolute;
+                top: 2rem;
+                right: 2rem;
+            }
+
+            .navbar {
+                flex-direction: column-reverse;
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                justify-content: center;
+                gap: 1.5rem;
+                background-color: var(--gray);
+                transition: 1s;
+                transform: translateY(-100vh);
+
+                .actions {
+                    flex-direction: column;
+                }
+
+                .navbarOptions {
+                    flex-direction: column;
+                    text-align: center;
+                }
+            }
+
+            .responsive_nav {
+                transform: none;
+            }
+        }
+    }
+
+
+    /*    nav .nav-close-btn {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+    }
+
+    nav a {
+        font-size: 1.5rem;
+    } */
+}
