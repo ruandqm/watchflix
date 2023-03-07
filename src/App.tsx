@@ -1,9 +1,17 @@
 import './App.scss'
+import { Footer } from './components/Footer/Footer'
+import { Navbar } from './components/Navbar/Navbar'
 
 function App() {
   return (
     <div className="App">
-      WatchFlix
+      <div className="container">
+        <section className="heroSection">
+          <Navbar />
+        </section>
+      </div>
+
+      <Footer />
     </div>
   )
 }

@@ -8,13 +8,22 @@
 
 :root {
     --gray: #2E2E2E;
-    --secondary-gray: #302D28;
+    --secondary-gray: #3D3D3D;
     --accent: #FED530;
     --body: #808080;
     --disable: #E6E6E6;
+    --text-color: #FFF;
 }
 
 body {
     font-family: 'DM Sans', sans-serif;
     font-size: 16px;
+}
+
+h1 {
+    font-weight: 700;
+}
+
+h2 {
+    font-weight: 500;
 }
