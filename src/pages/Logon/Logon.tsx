@@ -6,7 +6,7 @@ import { Navbar } from '../../components/Navbar/Navbar';
 import { Footer } from '../../components/Footer/Footer';
 import { Formik, Field, Form } from 'formik';
 
-const Logon: React.FC = () => {
+export const Logon: React.FC = () => {
 
     const [page, setPage] = useState<number>(1)
     const phoneRegExp = /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/
@@ -132,5 +132,3 @@ const Logon: React.FC = () => {
         </div>
     )
 }
-
-export default Logon
