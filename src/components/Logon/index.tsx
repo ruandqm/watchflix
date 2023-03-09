@@ -6,6 +6,20 @@ import { Navbar } from '../../components/Navbar/Navbar';
 import { Footer } from '../../components/Footer/Footer';
 import { Formik, Field, Form } from 'formik';
 
+
+interface ILogon {
+    emailAnddressLogin?: string
+    passwordLogin?: string
+    firstName?: string
+    lastName?: string
+    passwordRegister?: string
+    emailAnddressRegister?: string
+    phone?: string
+    url?: string
+}
+
+import axios from 'axios';
+
 const Logon: React.FC = () => {
 
     const [page, setPage] = useState<number>(1)
@@ -15,9 +29,7 @@ const Logon: React.FC = () => {
         firstName: yup.string().min(3, "O nome deve ter mais de 3 letras").required('Preencha este campo'),
         lastName: yup.string().required('Preencha este campo'),
         passwordRegister: yup.string().min(8, 'No mínimo 8 caracteres').required('Preencha este campo'),
-        passwordLogin: yup.string().min(8, 'No mínimo 8 caracteres').required('Preencha este campo'),
         emailAnddressRegister: yup.string().email('Deve ser do tipo Email').required('Preencha este campo'),
-        emailAnddressLogin: yup.string().email('Deve ser do tipo Email').required('Preencha este campo'),
         url: yup.string().url('Url inválida').required('Preencha este campo'),
         phone: yup.string().min(8, 'Telefone precisa ter no mínimo 9 caracteres').required('Preencha este campo').matches(phoneRegExp, 'Formato de número inválido')
     })
@@ -27,8 +39,45 @@ const Logon: React.FC = () => {
         emailAnddressLogin: yup.string().email('Deve ser do tipo Email').required('Preencha este campo'),
     })
 
-    function submit(values: any) {
-        console.log(values)
+    function submit(values: ILogon) {
+        if (page == 1) {
+            let object = {
+                url: values.url,
+                LastName: values.lastName,
+                FirstName: values.firstName,
+                password: values.passwordRegister,
+                Email: values.emailAnddressRegister,
+                phone: values.phone
+            }
+
+            axios.post('https://apigenerator.dronahq.com/api/T4woaltu/Users', object)
+                .then(function (response) {
+                    console.log(response);
+                    window.location.reload()
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        }
+
+        else {
+            let verification = [values.emailAnddressLogin, values.passwordLogin]
+            const response = axios.get('https://apigenerator.dronahq.com/api/T4woaltu/Users')
+                .then(function (response) {
+                    console.log(response);
+                    const verification = response.data.filter((item: { Email: string }) => item.Email == values.emailAnddressLogin)
+
+                    if (verification[0].Email == values.emailAnddressLogin && values.passwordLogin == verification[0].password) {
+                        alert('Deu certo')
+                    }
+
+                    else {
+                        alert('Não deu certo')
+                    }
+                })
+
+        }
+
     }
 
     return (
@@ -107,12 +156,12 @@ const Logon: React.FC = () => {
                                     <Form>
                                         {page == 2 && (
                                             <>
-                                                <div className='groupInput' style={{ width: '468px' }}>
+                                                <div className='groupInput'>
                                                     <label htmlFor="emailAnddressLogin">Email anddress</label>
                                                     <Field id={'emailAnddressLogin'} name={'emailAnddressLogin'} />
                                                     <span>{errors.emailAnddressLogin}</span>
                                                 </div>
-                                                <div className='groupInput' style={{ width: '468px' }}>
+                                                <div className='groupInput'>
                                                     <label htmlFor="passwordLogin">Password</label>
                                                     <Field id={'passwordLogin'} name={'passwordLogin'} type={'password'} />
                                                     <span>{errors.passwordLogin}</span>
@@ -123,7 +172,6 @@ const Logon: React.FC = () => {
                                     </Form>
                                 </>)
                         }}
-
                     >
                     </Formik>
                 </div>
