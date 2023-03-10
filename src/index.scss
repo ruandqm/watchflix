@@ -22,8 +22,14 @@ body {
 
 h1 {
     font-weight: 700;
+    font-size: 2rem;
 }
 
 h2 {
     font-weight: 500;
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
 }
