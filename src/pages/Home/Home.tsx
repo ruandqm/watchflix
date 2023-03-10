@@ -1,22 +1,38 @@
 import './style.scss'
 import { Footer } from '../../components/Footer/Footer'
 import { Navbar } from '../../components/Navbar/Navbar'
-import { useEffect } from 'react'
-import axios from 'axios'
+import { adaptGetMovies } from '../../shared/adapters/adaptGetMovies'
+import { MovieCard } from '../../components/MovieCard/MovieCard'
+import { useEffect, useState } from 'react'
+import tmdbApi from '../../services/api/tmdbApi'
 
 export const Home = () => {
+    const [movies, setMovies] = useState<any>([])
+
+    const getAdaptedMovies = async () => {
+        const moviesData = await tmdbApi('movie/popular').then((data) => {
+            return adaptGetMovies(data)
+        })
+        setMovies(moviesData)
+    }
+
     useEffect(() => {
-        const getData = async () => {
-            const response = await axios.get('https://api.themoviedb.org/3//movie/popular?api_key=a2dc52189308fdeb269067a59d420f4b')
-            console.log(response.data)
-        }
-        getData()
+        getAdaptedMovies()
     }, [])
+
     return (
         <div className="HomeContainer">
             <div className="container">
                 <section className="heroSection">
                     <Navbar />
+                </section>
+                <section className="movieCardsSection">
+                    {movies.results != undefined ? (movies.length != 0 ? (
+                        movies.results.map((movie: movie) => {
+                            return <MovieCard key={movie.id} data={movie} />
+                        })
+                    ) : null) : null}
+
                 </section>
             </div>
             <Footer />

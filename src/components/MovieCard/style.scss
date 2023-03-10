@@ -1,0 +1,47 @@
+.MovieCardContainer {
+    background-color: gray;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-top: 2rem;
+    width: 200px;
+    height: 300px;
+    margin: auto;
+    position: relative;
+    // flex: 0 0 250px;
+
+    .movieCardContent {
+        width: 100%;
+        height: 100%;
+        padding: 1rem;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: var(--text-color);
+
+        .genre {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+
+            span {
+                background-color: var(--accent);
+                font-size: 0.8em;
+                font-weight: 500;
+                color: #000;
+                border-radius: 1rem;
+                padding: 0.3rem;
+            }
+        }
+
+        .movieInfos {
+            position: absolute;
+            bottom: 0;
+            margin-bottom: 1rem;
+
+            h2 {
+                background-color: #0000008a;
+                padding: 0.5rem;
+                border-radius: 0.5rem;
+            }
+        }
+    }
+
+}
