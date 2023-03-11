@@ -5,20 +5,17 @@ import { adaptGetMovies } from '../../shared/adapters/adaptGetMovies'
 import { MovieCard } from '../../components/MovieCard/MovieCard'
 import { useEffect, useState } from 'react'
 import tmdbApi from '../../services/api/tmdbApi'
+import { useQuery } from 'react-query'
+import { Loading } from '../../components/Loading/Loading'
 
 export const Home = () => {
-    const [movies, setMovies] = useState<any>([])
-
-    const getAdaptedMovies = async () => {
+    const { data, isFetching } = useQuery('homeMovies', async () => {
         const moviesData = await tmdbApi('movie/popular').then((data) => {
             return adaptGetMovies(data)
         })
-        setMovies(moviesData)
-    }
+        return moviesData
+    })
 
-    useEffect(() => {
-        getAdaptedMovies()
-    }, [])
 
     return (
         <div className="HomeContainer">
@@ -27,11 +24,12 @@ export const Home = () => {
                     <Navbar />
                 </section>
                 <section className="movieCardsSection">
-                    {movies.results != undefined ? (movies.length != 0 ? (
-                        movies.results.map((movie: movie) => {
+                    {isFetching && <Loading />}
+                    {data != undefined ? (
+                        data.results.map((movie: movie) => {
                             return <MovieCard key={movie.id} data={movie} />
                         })
-                    ) : null) : null}
+                    ) : null}
 
                 </section>
             </div>
