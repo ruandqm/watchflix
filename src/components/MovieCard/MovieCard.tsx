@@ -3,7 +3,7 @@ import './style.scss'
 export const MovieCard = (props: { data: movie }) => {
 
     if (props.data != undefined) {
-        const imageUrl = `https://image.tmdb.org/t/p/original/${props.data.poster}`
+        const imageUrl = `https://image.tmdb.org/t/p/w200/${props.data.poster}`
         return (
             <article className='MovieCardContainer' style={{ backgroundImage: `url(${imageUrl})` }}>
                 <div className="movieCardContent">

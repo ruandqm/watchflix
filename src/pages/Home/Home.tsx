@@ -3,7 +3,6 @@ import { Footer } from '../../components/Footer/Footer'
 import { Navbar } from '../../components/Navbar/Navbar'
 import { adaptGetMovies } from '../../shared/adapters/adaptGetMovies'
 import { MovieCard } from '../../components/MovieCard/MovieCard'
-import { useEffect, useState } from 'react'
 import tmdbApi from '../../services/api/tmdbApi'
 import { useQuery } from 'react-query'
 import { Loading } from '../../components/Loading/Loading'
@@ -15,7 +14,6 @@ export const Home = () => {
         })
         return moviesData
     })
-
 
     return (
         <div className="HomeContainer">
