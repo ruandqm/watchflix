@@ -4,6 +4,7 @@ import { Movies } from "./pages/Movies/Movies";
 import { LastWatch } from "./pages/LastWatch/LastWatch";
 import { Favorites } from "./pages/Favorites/Favorites";
 import { Logon } from './pages/Logon/Logon'
+import { Search } from "./pages/Search/Search";
 
 export const App = () => {
   return (
@@ -13,6 +14,7 @@ export const App = () => {
       <Route path="/lastWatch" element={<LastWatch />} />
       <Route path="/favorites" element={<Favorites />} />
       <Route path="/logon" element={<Logon />} />
+      <Route path="/search/:query" element={<Search />} />
     </Routes>
   )
 }
