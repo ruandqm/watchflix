@@ -1,7 +1,7 @@
 import './style.scss'
 
-import Play from '../../Assets/Play.svg'
-import Heart from '../../Assets/heart.svg'
+import Play from '../../assets/Play.svg'
+import Heart from '../../assets/heart.svg'
 
 import { Footer } from "../../components/Footer/Footer"
 import { Navbar } from "../../components/Navbar/Navbar"
@@ -28,7 +28,7 @@ export const Movie: React.FC = () => {
         const response = await tmdbApi('/movie/550')
         SetResponse(response)
     }
-    
+
     async function setValuesTrailers() {
         const response = await tmdbApi('/movie/550/videos')
         SetTrailers(response)
