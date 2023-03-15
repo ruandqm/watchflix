@@ -8,7 +8,6 @@ export const Navbar = () => {
     const checkboxRef = useRef(null as unknown as HTMLInputElement)
     const [search, setSearch] = useState('')
     const [isChecked, setIsChecked] = useState(false)
-    // let eventIsProcessed = false
 
     const user = useSelector((state: IState) => state.user)
 
