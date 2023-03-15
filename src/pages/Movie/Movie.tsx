@@ -9,15 +9,6 @@ import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import { adaptMovie } from '../../shared/adapters/adaptMovie'
 
-interface API {
-    backdrop_path: string
-    genres: { name: string }[]
-    vote_average: number
-    runtime: number
-    original_title: string
-    overview: string
-}
-
 export const Movie: React.FC = () => {
     const params = useParams()
 

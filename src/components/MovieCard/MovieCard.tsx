@@ -11,7 +11,8 @@ export const MovieCard = (props: { data: movie, first?: boolean }) => {
             console.log(dataJson)
             window.localStorage.setItem('lastWatchList', JSON.stringify(dataJson))
         } else {
-            window.localStorage.setItem('lastWatchList', '[]')
+            const localInit = [props.data]
+            window.localStorage.setItem('lastWatchList', JSON.stringify(localInit))
         }
         window.location.replace(`/movie/${props.data.id}`)
     }

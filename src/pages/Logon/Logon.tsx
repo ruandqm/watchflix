@@ -6,23 +6,17 @@ import { Navbar } from '../../components/Navbar/Navbar';
 import { Footer } from '../../components/Footer/Footer';
 import { Formik, Field, Form } from 'formik';
 
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-interface ILogon {
-    emailAnddressLogin?: string
-    passwordLogin?: string
-    firstName?: string
-    lastName?: string
-    passwordRegister?: string
-    emailAnddressRegister?: string
-    phone?: string
-    url?: string
-}
+import store from '../../store';
+
+import { setInforUser } from '../../store/User/action';
 
 export const Logon: React.FC = () => {
-
     const [page, setPage] = useState<number>(1)
     const phoneRegExp = /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/
+    const navigate = useNavigate()
 
     const schemaRegister = yup.object().shape({
         firstName: yup.string().min(3, "O nome deve ter mais de 3 letras").required('Preencha este campo'),
@@ -55,24 +49,35 @@ export const Logon: React.FC = () => {
                     window.location.reload()
                 })
                 .catch(function (error) {
+                    alert('Erro')
+                    window.location.reload()
                     console.error(error);
                 });
         }
 
         else {
             let verification = [values.emailAnddressLogin, values.passwordLogin]
+
             const response = axios.get('https://apigenerator.dronahq.com/api/T4woaltu/Users')
                 .then(function (response) {
-                    console.log(response);
                     const verification = response.data.filter((item: { Email: string }) => item.Email == values.emailAnddressLogin)
 
+                    console.log(verification)
+
                     if (verification[0].Email == values.emailAnddressLogin && values.passwordLogin == verification[0].password) {
-                        alert('Deu certo')
+                        store.dispatch(setInforUser([verification[0].FirstName, verification[0].LastName, verification[0].url]))
+                        localStorage.setItem('user', JSON.stringify([verification[0].FirstName, verification[0].LastName, verification[0].url]))
+                        navigate('/')
                     }
 
                     else {
-                        alert('Não deu certo')
+                        alert('Senha ou email inválidos, tente novamente')
+                        window.location.reload()
                     }
+                })
+                .catch((erro) => {
+                    alert('Email inexistente, efetue o Cadastro')
+                    window.location.reload()
                 })
 
         }

@@ -3,6 +3,7 @@ interface IProps {
     url: string
     index: number
 }
+
 const BoxTrailer: React.FC<IProps> = ({ url, index }) => {
     return (
         <div className="boxTrailer">
@@ -13,4 +14,5 @@ const BoxTrailer: React.FC<IProps> = ({ url, index }) => {
         </div>
     )
 }
+
 export default BoxTrailer

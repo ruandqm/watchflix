@@ -1,10 +1,7 @@
-const INITIAL_VALUES = {
-    inforUser: []
-}
+let userLocalStorage = localStorage.getItem('user')
 
-interface IAction {
-    type: string
-    payload: any
+const INITIAL_VALUES = {
+    inforUser: JSON.parse(userLocalStorage != undefined ? userLocalStorage : '[]')
 }
 
 export default function userRecucer(state = INITIAL_VALUES, action: IAction) {
@@ -12,7 +9,7 @@ export default function userRecucer(state = INITIAL_VALUES, action: IAction) {
         case ('VALUE_INFOR_USER'):
             return {
                 ...state,
-                nameUser: action.payload
+                inforUser: action.payload
             }
         default:
             return state
