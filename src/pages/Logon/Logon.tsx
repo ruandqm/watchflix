@@ -45,7 +45,6 @@ export const Logon: React.FC = () => {
 
             axios.post('https://apigenerator.dronahq.com/api/T4woaltu/Users', object)
                 .then(function (response) {
-                    console.log(response);
                     window.location.reload()
                 })
                 .catch(function (error) {
@@ -61,8 +60,6 @@ export const Logon: React.FC = () => {
             const response = axios.get('https://apigenerator.dronahq.com/api/T4woaltu/Users')
                 .then(function (response) {
                     const verification = response.data.filter((item: { Email: string }) => item.Email == values.emailAnddressLogin)
-
-                    console.log(verification)
 
                     if (verification[0].Email == values.emailAnddressLogin && values.passwordLogin == verification[0].password) {
                         store.dispatch(setInforUser([verification[0].FirstName, verification[0].LastName, verification[0].url]))
