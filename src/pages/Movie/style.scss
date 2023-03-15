@@ -84,6 +84,26 @@
                         transform: scale(1.05);
                     }
                 }
+
+                .genres {
+                    display: flex;
+                    gap: 1rem;
+
+                    .genre {
+                        display: flex;
+                        gap: 1rem;
+
+                        span {
+                            background-color: var(--accent);
+                            font-size: 0.8em;
+                            font-weight: 500;
+                            color: #000;
+                            border-radius: 1rem;
+                            padding: 0.3rem;
+                        }
+                    }
+                }
+
             }
         }
 
@@ -106,6 +126,8 @@
         }
     }
 }
+
+
 
 @media (max-width: 1200px) {
     .Movie_Container {

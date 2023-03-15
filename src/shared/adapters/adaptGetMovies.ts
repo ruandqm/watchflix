@@ -1,11 +1,9 @@
 import tmdbApi from "../../services/api/tmdbApi"
 
-type genre = {
-    id: number,
-    name: string
-}
+
 
 export const adaptGetMovies = async (moviesResponse: any) => {
+
     const getGenresNames = async (genresIds: number[]) => {
         const names: string[] = []
         for (const id of genresIds) {
@@ -23,10 +21,16 @@ export const adaptGetMovies = async (moviesResponse: any) => {
         return response.runtime
     }
 
+    const getTrailers = async (movieId: number) => {
+        const response = await tmdbApi(`/movie/${movieId}/videos`)
+        return response.results
+    }
+
     if (moviesResponse != undefined) {
-        const results = await Promise.all(moviesResponse.results.map(async (item: any, index: number) => {
+        const results: movie[] = await Promise.all(moviesResponse.results.map(async (item: any, index: number) => {
             const runtime = await getMovieDetails(item.id)
             const genre = await getGenresNames(item.genre_ids)
+            const trailers = await getTrailers(item.id)
             if (item.backdrop_path != null) {
                 return {
                     id: item.id,
@@ -36,7 +40,8 @@ export const adaptGetMovies = async (moviesResponse: any) => {
                     title: item.title,
                     rate: item.vote_average,
                     runtime,
-                    genre
+                    genre,
+                    trailers
                 }
             } else {
                 console.warn(`A api retornou com falhas o item de index ${index}. Por isso, ele foi removido do array e definido como undefined.`)
