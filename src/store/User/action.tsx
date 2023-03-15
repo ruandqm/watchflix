@@ -4,3 +4,10 @@ export function setInforUser(inforUser: string[]) {
         payload: inforUser
     }
 }
+
+export function setFavoriteUser(favorite: number) {
+    return {
+        type: 'VALUE_FAVORITE_USER',
+        payload: favorite
+    }
+}

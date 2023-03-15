@@ -1,0 +1,43 @@
+.containerFavorites {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--secondary-gray);
+    justify-content: space-between;
+
+    .backgroundNav {
+        background-color: var(--gray);
+    }
+
+    .groupMovies {
+
+        h3 {
+            text-align: center;
+            margin: 0px auto;
+            color: #FFF;
+        }
+
+        .moviesHeader {
+            margin: 20px auto;
+            display: flex;
+            border-radius: 15px;
+            justify-content: space-between;
+            background-color: var(--gray);
+            padding: 1rem 2rem;
+            align-items: center;
+            width: 70%;
+
+            h2 {
+                font-size: 2rem;
+                font-weight: 700;
+                color: var(--text-color);
+            }
+
+            .expand {
+                color: var(--accent);
+                font-size: 1.2rem;
+                cursor: pointer;
+            }
+        }
+    }
+}
