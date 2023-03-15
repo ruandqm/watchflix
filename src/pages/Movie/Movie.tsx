@@ -8,9 +8,17 @@ import tmdbApi from '../../services/api/tmdbApi'
 import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import { adaptMovie } from '../../shared/adapters/adaptMovie'
+import { useEffect, useState } from 'react'
+import HearRed from '../../assets/heartRed.png'
+
+import store from '../../store'
+import { useSelector } from 'react-redux'
+import { setFavoriteUser } from '../../store/User/action'
+import { Logout } from '../../services/auth'
 
 export const Movie: React.FC = () => {
     const params = useParams()
+    const user = useSelector((state: IState) => state.user)
 
     const { data, isFetching } = useQuery('MovieBanner', async () => {
         const moviesData = await tmdbApi(`/movie/${params.id}`).then((data) => {
@@ -21,11 +29,89 @@ export const Movie: React.FC = () => {
 
     const imageUrl = `https://image.tmdb.org/t/p/w1280/${data ? data.results.backdrop : ''}`
 
+    function addFavorites() {
+        Logout()
 
+        let favotiresLocal = localStorage.getItem('Favorites')
+
+        let arrayInfors = {
+            runtime: data?.results.runtime,
+            id: data?.results.id,
+            title: data?.results.title,
+            poster: data?.results.poster,
+            genres: data?.results.genre
+        }
+
+        if (user.inforUser.length > 0) {
+        if (favotiresLocal != null && favotiresLocal.length > 0) {
+            let inforsFavorites = JSON.parse(favotiresLocal)
+            inforsFavorites.push(arrayInfors)
+            localStorage.setItem('Favorites', JSON.stringify(inforsFavorites))
+        }
+
+        else {
+            let arrayInfor = [arrayInfors]
+            localStorage.setItem('Favorites', JSON.stringify(arrayInfor))
+        }
+
+        store.dispatch(setFavoriteUser(1))
+        }
+    }
+
+    function removeFavorites() {
+        let favotiresLocal = localStorage.getItem('Favorites')
+
+        if (favotiresLocal != null && favotiresLocal.length > 0) {
+            let indexArrayRemove: number = 0
+            let arrayInfors = JSON.parse(favotiresLocal)
+
+            arrayInfors.map((item: movie, index: number) => {
+                if (item.id == data?.results.id) {
+                    indexArrayRemove = index
+                }
+            })
+
+            arrayInfors.splice(indexArrayRemove, 1);
+
+            localStorage.setItem('Favorites', JSON.stringify(arrayInfors))
+
+            store.dispatch(setFavoriteUser(0))
+        }
+    }
+
+    async function verificantionFavorite() {
+        let favotiresLocal = localStorage.getItem('Favorites')
+
+        if (favotiresLocal != null && favotiresLocal.length > 0) {
+            let arrayInfors = JSON.parse(favotiresLocal)
+            let arrayFilter: movie[] = []
+
+            arrayInfors.map((item: movie) => {
+                if (item.id == data?.results.id) {
+                    arrayFilter = [item]
+                }
+            })
+
+            console.log(arrayFilter)
+
+            if (arrayFilter.length > 0) {
+                store.dispatch(setFavoriteUser(1))
+            }
+            else {
+                store.dispatch(setFavoriteUser(0))
+            }
+        }
+    }
+
+    useEffect(() => {
+        verificantionFavorite()
+    }, [data?.results.id])
     return (
         <>
             <div className="Movie_Container">
-                <Navbar />
+                <div className='.backgroundNav'>
+                    <Navbar />
+                </div>
                 <section className='Movie_Section'>
                     <div className='Movie_SectionInfor'>
                         <div className='SectionInfor_Left'>
@@ -48,7 +134,7 @@ export const Movie: React.FC = () => {
                                         <p>Duration: {data.results.runtime}</p>
                                         <p>Ratings: {data.results.rate.toFixed(1)}</p>
                                     </article>
-                                    <img src={Heart} alt="heart" height={'32px'} />
+                                    <img src={user.favorite == 0 ? Heart : HearRed} alt="heart" height={'32px'} onClick={user.favorite == 0 ? addFavorites : removeFavorites} />
                                 </>
                             )}
                         </div>

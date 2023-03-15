@@ -14,12 +14,10 @@ interface genre {
     name: string
 }
 
-
-
-
 interface IState {
     user: {
         inforUser: string[]
+        favorite: number
     }
 }
 

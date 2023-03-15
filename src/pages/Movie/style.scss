@@ -6,6 +6,10 @@
     flex-direction: column;
     justify-content: space-between;
 
+    .backgroundNav {
+        background-color: var(--gray);
+    }
+
     .Movie_Section {
         max-width: 1500px;
         margin: 0 auto;
