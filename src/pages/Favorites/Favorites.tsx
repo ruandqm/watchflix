@@ -4,6 +4,7 @@ import { Footer } from '../../components/Footer/Footer'
 
 import './style.scss'
 import { MoviesExpandedSection } from '../../components/MoviesExpandedSection/MoviesExpandedSection'
+import { NotFound } from '../../components/NotFound/NotFound'
 
 export const Favorites = () => {
     const localData = localStorage.getItem('Favorites')
@@ -17,7 +18,7 @@ export const Favorites = () => {
                 <section className="moviesHeader">
                     <h2>Filmes Favoritos</h2>
                 </section>
-                {localData == null || JSON.parse(localData).length == 0 ? <h3>Nenhum filme encontrado :(</h3> : <MoviesExpandedSection data={JSON.parse(localData)} />}
+                {localData == null || JSON.parse(localData).length == 0 ? <NotFound /> : <MoviesExpandedSection data={JSON.parse(localData)} />}
             </div>
             <Footer />
         </div>
