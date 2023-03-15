@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import './style.scss'
+import { useSelector } from 'react-redux/es/hooks/useSelector'
 
 export const Navbar = () => {
     const navRef = useRef(null as unknown as HTMLElement)
@@ -8,10 +9,12 @@ export const Navbar = () => {
     const [isChecked, setIsChecked] = useState(false)
     // let eventIsProcessed = false
 
+    const user = useSelector((state: IState) => state.user)
+
     const showNavbar = () => {
         navRef.current.classList.toggle("responsive_nav")
-    }
-
+    };
+    
     const clickSearchHandler = () => {
         if (isChecked && search.length != 0) {
             window.location.replace(`/search/${search}`)
@@ -23,7 +26,6 @@ export const Navbar = () => {
             clickSearchHandler()
         }
     }
-
 
     return (
         <header className='NavbarContainer'>
@@ -38,6 +40,12 @@ export const Navbar = () => {
                     </ul>
                     <div className="actions">
                         <div className="searchBox">
+                            <input type="checkbox" id="searchToggle" />
+                            <label htmlFor="searchToggle" className="searchToggleIcon"><span className="material-symbols-outlined searchIcon">
+                                search
+                            </span>
+                            </label>
+                            <input type="text" className='searchBoxInput' placeholder='Pesquise um título' />
 
                             <input type="checkbox" id="searchToggle" ref={checkboxRef} onClick={() => setIsChecked(checkboxRef.current.checked)} />
                             <label htmlFor="searchToggle" className="searchToggleIcon" ><span onClick={clickSearchHandler} className="material-symbols-outlined searchIcon">
@@ -45,13 +53,14 @@ export const Navbar = () => {
                             </span>
                             </label>
                             <input type="text" onChange={(event) => setSearch(event.target.value)} onKeyDown={handleKeyDown} className='searchBoxInput' placeholder='Pesquise um título' />
-
                         </div>
-
                         <div className="userAccount">
-                            {/*  <img className='userImg' src="https://media.licdn.com/dms/image/D4D35AQFLC1gPJx2Miw/profile-framedphoto-shrink_800_800/0/1654873367191?e=1678759200&v=beta&t=0-rglg0dZn5GjDVFrz6Z6eekfK8E-ukZPMqHbyyVYF0" alt="user image" />
-                            <span>Luizão Manzola</span> */}
-                            <a href="/logon">Login</a>
+                            {user.inforUser.length > 0 ? (
+                                <>
+                                    <img className='userImg' src={user.inforUser[2]} alt="user image" />
+                                    <span>{`${user.inforUser[0]} ${user.inforUser[1]}`}</span>
+                                </>
+                            ) : <a href="/logon">Login</a>}
                         </div>
                     </div>
                     <button
@@ -63,8 +72,6 @@ export const Navbar = () => {
                     </button>
                 </nav>
             </div>
-
-
             <button className="nav-btn" onClick={showNavbar}>
                 <span className="material-symbols-outlined">
                     menu
