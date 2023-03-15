@@ -20,7 +20,7 @@ export const NotFound = () => {
     };
     return (
         <div className="notFoundContainer">
-            <h2>Desculpe, a sua pesquisa não retornou nenhum resultado!</h2>
+            <h2>Parece que não há nada aqui!</h2>
             <Lottie
                 options={defaultOptions}
                 width={400}
