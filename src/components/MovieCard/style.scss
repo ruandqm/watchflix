@@ -1,13 +1,11 @@
 .MovieCardContainer {
     background-color: gray;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
-    margin-top: 2rem;
-    width: 200px;
+    flex: 0 0 200px;
     height: 300px;
-    margin: auto;
     position: relative;
-    // flex: 0 0 250px;
+    cursor: pointer;
 
     .movieCardContent {
         width: 100%;
@@ -44,4 +42,8 @@
         }
     }
 
+}
+
+.backdropCard {
+    flex: 0 0 26rem !important;
 }

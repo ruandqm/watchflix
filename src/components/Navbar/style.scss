@@ -4,6 +4,7 @@
     justify-content: space-between;
     padding: 2rem 3rem;
     color: var(--text-color);
+    z-index: 999;
 
     .index {
         display: flex;
@@ -139,6 +140,7 @@
 
             .responsive_nav {
                 transform: none;
+                z-index: 1080;
             }
         }
     }

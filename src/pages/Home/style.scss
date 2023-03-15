@@ -15,14 +15,15 @@
             color: var(--text-color);
         }
 
-        .movieCardsSection {
+        .moviesHeader {
             width: 70%;
             margin: auto;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin-bottom: 2rem;
+
+            h2 {
+                font-size: 2rem;
+                font-weight: 700;
+                color: var(--text-color);
+            }
         }
     }
-
 }

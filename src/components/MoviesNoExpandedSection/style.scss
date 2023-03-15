@@ -1,0 +1,17 @@
+.MoviesNoExpandedSection {
+    width: 70%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+    .layoutFirstDivControl,
+    .layoutSecondDivControl {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+}

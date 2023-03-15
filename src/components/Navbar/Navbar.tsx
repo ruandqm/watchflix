@@ -1,15 +1,31 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import './style.scss'
 import { useSelector } from 'react-redux/es/hooks/useSelector'
 
 export const Navbar = () => {
-    const navRef = useRef(null as unknown as HTMLElement);
+    const navRef = useRef(null as unknown as HTMLElement)
+    const checkboxRef = useRef(null as unknown as HTMLInputElement)
+    const [search, setSearch] = useState('')
+    const [isChecked, setIsChecked] = useState(false)
+    // let eventIsProcessed = false
 
     const user = useSelector((state: IState) => state.user)
 
     const showNavbar = () => {
         navRef.current.classList.toggle("responsive_nav")
     };
+    
+    const clickSearchHandler = () => {
+        if (isChecked && search.length != 0) {
+            window.location.replace(`/search/${search}`)
+        }
+    }
+
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+        if (event.key === 'Enter') {
+            clickSearchHandler()
+        }
+    }
 
     return (
         <header className='NavbarContainer'>
@@ -30,6 +46,13 @@ export const Navbar = () => {
                             </span>
                             </label>
                             <input type="text" className='searchBoxInput' placeholder='Pesquise um título' />
+
+                            <input type="checkbox" id="searchToggle" ref={checkboxRef} onClick={() => setIsChecked(checkboxRef.current.checked)} />
+                            <label htmlFor="searchToggle" className="searchToggleIcon" ><span onClick={clickSearchHandler} className="material-symbols-outlined searchIcon">
+                                search
+                            </span>
+                            </label>
+                            <input type="text" onChange={(event) => setSearch(event.target.value)} onKeyDown={handleKeyDown} className='searchBoxInput' placeholder='Pesquise um título' />
                         </div>
                         <div className="userAccount">
                             {user.inforUser.length > 0 ? (
