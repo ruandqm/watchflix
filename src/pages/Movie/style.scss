@@ -1,0 +1,232 @@
+.Movie_Container {
+    display: flex;
+    background: rgb(97, 97, 98);
+    background: linear-gradient(90deg, rgba(97, 97, 98, 0.9654236694677871) 0%, rgba(0, 0, 0, 0.9458158263305322) 55%, rgba(0, 0, 0, 0.9738270308123249) 100%);
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .Movie_Section {
+        max-width: 1500px;
+        margin: 0 auto;
+        width: 98%;
+
+        .Movie_SectionInfor {
+            display: flex;
+            gap: 1%;
+
+            .SectionInfor_Left {
+                width: 58%;
+                display: flex;
+                align-items: end;
+                justify-content: flex-start;
+                position: relative;
+
+                img {
+                    width: 95%;
+                    border-radius: 20px;
+                    margin: 0 auto;
+                }
+
+                .ButtonPlay {
+                    position: absolute;
+                    bottom: 20px;
+                    left: 5%;
+                    width: 160px;
+                    border-bottom: 3px solid #FED530;
+                    border-right: 3px solid #808080;
+                    border-left: 3px solid #FED530;
+                    border-top: 3px solid #FED530;
+                    height: 160px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 50%;
+
+                    button {
+                        background-color: #FED530;
+                        border-radius: 50%;
+                        display: flex;
+                        width: 70px;
+                        height: 70px;
+                        border: none;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+            }
+
+            .SectionInfor_Right {
+                width: 41%;
+                color: var(--text-color);
+                display: flex;
+                justify-content: space-around;
+                align-items: start;
+                flex-direction: column;
+                gap: 20px;
+
+                h2 {
+                    font-size: 4em;
+                }
+
+                article {
+                    p {
+                        margin-top: 15px;
+                        font-size: 1em;
+                    }
+                }
+
+                img {
+                    cursor: pointer;
+                    transition: .7s all;
+
+                    &:hover {
+                        transform: scale(1.05);
+                    }
+                }
+
+                .genres {
+                    display: flex;
+                    gap: 1rem;
+
+                    .genre {
+                        display: flex;
+                        gap: 1rem;
+
+                        span {
+                            background-color: var(--accent);
+                            font-size: 0.8em;
+                            font-weight: 500;
+                            color: #000;
+                            border-radius: 1rem;
+                            padding: 0.3rem;
+                        }
+                    }
+                }
+
+            }
+        }
+
+        .trailersSection {
+            margin-top: 40px;
+            margin-bottom: 50px;
+
+            h2 {
+                font-weight: 700;
+                color: var(--text-color);
+                font-size: 1.8em;
+                margin: 20px 0;
+            }
+
+            .groupBoxTrailers {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 23px;
+            }
+        }
+    }
+}
+
+
+
+@media (max-width: 1200px) {
+    .Movie_Container {
+
+        .Movie_Section {
+            width: 90%;
+
+            .Movie_SectionInfor {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+
+                .SectionInfor_Left {
+                    width: 100%;
+
+                    img {
+                        width: 100%;
+                    }
+
+                    .ButtonPlay {
+                        width: 100px;
+                        height: 100px;
+
+                        button {
+                            width: 45px;
+                            height: 45px;
+                        }
+                    }
+                }
+
+                .SectionInfor_Right {
+                    width: 100%;
+
+                    h2 {
+                        font-size: 3em;
+                    }
+
+                    article {
+                        p {
+                            font-size: 1.1em;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .Movie_Container {
+
+        .Movie_Section {
+            width: 97%;
+
+            .Movie_SectionInfor {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+
+                .SectionInfor_Left {
+                    .ButtonPlay {
+                        width: 80px;
+                        height: 80px;
+
+                        button {
+                            width: 40px;
+                            height: 40px;
+                        }
+                    }
+                }
+
+                .SectionInfor_Right {
+                    width: 100%;
+
+                    p {
+                        text-align: justify;
+                        width: 95%;
+                    }
+
+                    h2 {
+                        font-size: 2.4em;
+                    }
+
+                    article {
+                        p {
+                            text-align: left;
+                            font-size: 1em;
+                        }
+                    }
+                }
+            }
+
+            .trailersSection {
+
+                .groupBoxTrailers {
+                    justify-content: center;
+                }
+            }
+        }
+    }
+}
