@@ -1,7 +1,4 @@
 import './style.scss'
-
-import { useEffect, useState } from 'react'
-
 import Play from '../../assets/Play.svg'
 import Heart from '../../assets/heart.svg'
 import { Footer } from "../../components/Footer/Footer"
@@ -12,48 +9,7 @@ import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import { adaptMovie } from '../../shared/adapters/adaptMovie'
 
-
-interface API {
-    backdrop_path: string
-    genres: { name: string }[]
-    vote_average: number
-    runtime: number
-    original_title: string
-    overview: string
-}
-
 export const Movie: React.FC = () => {
-
-    const [response, SetResponse] = useState<API>()
-    const [trailers, SetTrailers] = useState<{ results: { key: string }[] }>()
-    const imageUrl = `https://image.tmdb.org/t/p/w1280/${response ? response.backdrop_path : ''}`
-
-    async function setValuesMovie() {
-        const response = await tmdbApi('/movie/550')
-        SetResponse(response)
-    }
-    
-    async function setValuesTrailers() {
-        const response = await tmdbApi('/movie/550/videos')
-        SetTrailers(response)
-    }
-
-
-    function AdaptRunTime() {
-        if (response != undefined) {
-            let time = { horas: 0, minutos: 0 }
-            let Horas = response.runtime / 60
-            time.horas = parseInt(Horas.toFixed(0))
-            time.minutos = response.runtime - (parseInt(Horas.toFixed(0)) * 60)
-            return time
-        }
-    }
-
-    useEffect(() => {
-        setValuesMovie()
-        setValuesTrailers()
-    }, [])
-
     const params = useParams()
 
     const { data, isFetching } = useQuery('MovieBanner', async () => {

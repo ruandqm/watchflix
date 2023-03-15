@@ -67,7 +67,7 @@ export const Logon: React.FC = () => {
                     if (verification[0].Email == values.emailAnddressLogin && values.passwordLogin == verification[0].password) {
                         store.dispatch(setInforUser([verification[0].FirstName, verification[0].LastName, verification[0].url]))
                         localStorage.setItem('user', JSON.stringify([verification[0].FirstName, verification[0].LastName, verification[0].url]))
-                        navigate('/asd')
+                        navigate('/')
                     }
 
                     else {

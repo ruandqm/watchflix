@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import './style.scss'
-import { useSelector } from 'react-redux/es/hooks/useSelector'
+import { useSelector } from 'react-redux'
+
 
 export const Navbar = () => {
     const navRef = useRef(null as unknown as HTMLElement)
@@ -13,8 +14,8 @@ export const Navbar = () => {
 
     const showNavbar = () => {
         navRef.current.classList.toggle("responsive_nav")
-    };
-    
+    }
+
     const clickSearchHandler = () => {
         if (isChecked && search.length != 0) {
             window.location.replace(`/search/${search}`)
@@ -26,6 +27,7 @@ export const Navbar = () => {
             clickSearchHandler()
         }
     }
+
 
     return (
         <header className='NavbarContainer'>
@@ -40,12 +42,6 @@ export const Navbar = () => {
                     </ul>
                     <div className="actions">
                         <div className="searchBox">
-                            <input type="checkbox" id="searchToggle" />
-                            <label htmlFor="searchToggle" className="searchToggleIcon"><span className="material-symbols-outlined searchIcon">
-                                search
-                            </span>
-                            </label>
-                            <input type="text" className='searchBoxInput' placeholder='Pesquise um título' />
 
                             <input type="checkbox" id="searchToggle" ref={checkboxRef} onClick={() => setIsChecked(checkboxRef.current.checked)} />
                             <label htmlFor="searchToggle" className="searchToggleIcon" ><span onClick={clickSearchHandler} className="material-symbols-outlined searchIcon">
@@ -53,7 +49,9 @@ export const Navbar = () => {
                             </span>
                             </label>
                             <input type="text" onChange={(event) => setSearch(event.target.value)} onKeyDown={handleKeyDown} className='searchBoxInput' placeholder='Pesquise um título' />
+
                         </div>
+
                         <div className="userAccount">
                             {user.inforUser.length > 0 ? (
                                 <>
@@ -72,6 +70,8 @@ export const Navbar = () => {
                     </button>
                 </nav>
             </div>
+
+
             <button className="nav-btn" onClick={showNavbar}>
                 <span className="material-symbols-outlined">
                     menu
