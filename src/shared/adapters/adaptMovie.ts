@@ -8,7 +8,6 @@ export const adaptMovie = async (moviesResponse: any) => {
     }
 
     if (moviesResponse != undefined) {
-        console.log(moviesResponse)
         const trailers = await getTrailers(moviesResponse.id)
         const results: movie = {
             id: moviesResponse.id,
