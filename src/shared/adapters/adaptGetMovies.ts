@@ -1,7 +1,5 @@
 import tmdbApi from "../../services/api/tmdbApi"
 
-
-
 export const adaptGetMovies = async (moviesResponse: any) => {
 
     const getGenresNames = async (genresIds: number[]) => {

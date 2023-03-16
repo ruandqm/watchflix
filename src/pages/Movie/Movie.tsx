@@ -130,7 +130,7 @@ export const Movie: React.FC = () => {
                                         <div className='genres'>Genres: {data != undefined ? data.results.genre.map((genre: genre, index: number) => {
                                             return <div className="genre" key={index}> <span>{genre.name}</span></div>
                                         }) : null}</div>
-                                        <p>Duration: {data.results.runtime}</p>
+                                        <p>Duration: {data.results.runtime} minutes</p>
                                         <p>Ratings: {data.results.rate.toFixed(1)}</p>
                                     </article>
                                     <img src={user.favorite == 0 ? Heart : HearRed} alt="heart" height={'32px'} onClick={user.favorite == 0 ? addFavorites : removeFavorites} />
