@@ -17,9 +17,9 @@ Here are some of the main technologies used in this project:
 - Lottie
 - Formik
 - React Router
-- Getting Started
 
-## To get started with Watchflix, you'll need to follow these simple steps:
+## Getting Started
+To get started with Watchflix, you'll need to follow these simple steps:
 
 - Clone this repository: git clone https://github.com/yourusername/watchflix.git
 - Navigate to the project directory: cd watchflix
