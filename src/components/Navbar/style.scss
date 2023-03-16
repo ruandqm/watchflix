@@ -77,14 +77,45 @@
 
                 .userAccount {
                     display: flex;
-                    gap: 1rem;
                     align-items: center;
-                    cursor: pointer;
+                    gap: 10px;
 
-                    .userImg {
-                        border-radius: 50%;
-                        width: 3rem;
-                        height: 3rem;
+                    .groupUser {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1rem;
+                        transition: 1s all;
+                        align-items: center;
+                        justify-content: center;
+                        height: 50px;
+
+                        .flex {
+                            display: flex;
+                            gap: 1rem;
+                            cursor: pointer;
+                            justify-content: center;
+                            align-items: center;
+
+                            .userImg {
+                                border-radius: 50%;
+                                width: 3rem;
+                                height: 3rem;
+                            }
+
+                        }
+
+                        button {
+                            display: none;
+                            background-color: var(--accent);
+                            border: none;
+                            width: 80%;
+                            text-align: center;
+                            margin: 0 auto;
+                            font-size: 1em;
+                            border-radius: 10px;
+                            font-weight: 700;
+                            padding: 8px 20px;
+                        }
                     }
                 }
             }

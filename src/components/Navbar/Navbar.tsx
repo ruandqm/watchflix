@@ -2,11 +2,14 @@ import React, { useRef, useState } from 'react'
 import './style.scss'
 import { useSelector } from 'react-redux'
 
+import store from '../../store'
+import { setInforUser } from '../../store/User/action'
 
 export const Navbar = () => {
     const navRef = useRef(null as unknown as HTMLElement)
     const checkboxRef = useRef(null as unknown as HTMLInputElement)
     const [search, setSearch] = useState('')
+    const [logout, setLogout] = useState(false)
     const [isChecked, setIsChecked] = useState(false)
 
     const user = useSelector((state: IState) => state.user)
@@ -27,6 +30,13 @@ export const Navbar = () => {
         }
     }
 
+    function Logout() {
+        localStorage.setItem('user', '[]')
+        store.dispatch(setInforUser([]))
+        localStorage.setItem('Favorites', '[]')
+        localStorage.setItem('lastWatchList', '[]')
+        window.location.reload()
+    }
 
     return (
         <header className='NavbarContainer'>
@@ -48,14 +58,19 @@ export const Navbar = () => {
                             </span>
                             </label>
                             <input type="text" onChange={(event) => setSearch(event.target.value)} onKeyDown={handleKeyDown} className='searchBoxInput' placeholder='Pesquise um título' />
-
                         </div>
 
                         <div className="userAccount">
                             {user.inforUser.length > 0 ? (
                                 <>
-                                    <img className='userImg' src={user.inforUser[2]} alt="user image" />
-                                    <span>{`${user.inforUser[0]} ${user.inforUser[1]}`}</span>
+                                    <div className='groupUser' style={{ height: logout ? '100px' : '' }}>
+                                        <div className='flex' onClick={() => setLogout(!logout)}>
+                                            <img className='userImg' src={user.inforUser[2]} alt="user image" />
+                                            <span>{`${user.inforUser[0]} ${user.inforUser[1]}`}</span>
+                                        </div>
+                                        <button type='button' onClick={() => Logout()} style={{ display: logout ? 'initial' : '' }}>Sair</button>
+                                    </div>
+
                                 </>
                             ) : <a href="/logon">Login</a>}
                         </div>
