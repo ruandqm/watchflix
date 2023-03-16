@@ -47,7 +47,7 @@ export const LastWatch = () => {
                     <span className='expand' onClick={() => setIsExpanded(!isExpanded)}>{isExpanded ? 'Ver Menos' : 'Ver Mais'}</span>
                 </section>
 
-                {localData == null || localData.length == 0 ? <NotFound /> : ''}
+                {localData == null || JSON.parse(localData).length == 0 ? <NotFound /> : ''}
                 {!isExpanded && data != null ? <MoviesNoExpandedSection data={data} /> : null}
                 {isExpanded && data != null ? <MoviesExpandedSection data={data} /> : null}
             </div>
