@@ -14,6 +14,9 @@ import store from '../../store';
 import { setInforUser } from '../../store/User/action';
 
 export const Logon: React.FC = () => {
+    const api = 'https://retoolapi.dev/wNoAUA/watchflix'
+
+    //const dronahqapi = 'https://apigenerator.dronahq.com/api/T4woaltu/Users'
     const [page, setPage] = useState<number>(1)
     const phoneRegExp = /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/
     const navigate = useNavigate()
@@ -43,8 +46,9 @@ export const Logon: React.FC = () => {
                 phone: values.phone
             }
 
-            axios.post('https://apigenerator.dronahq.com/api/T4woaltu/Users', object)
+            axios.post(api, object)
                 .then(function (response) {
+                    alert('Cadastro realizado com sucesso!')
                     window.location.reload()
                 })
                 .catch(function (error) {
@@ -57,7 +61,7 @@ export const Logon: React.FC = () => {
         else {
             let verification = [values.emailAnddressLogin, values.passwordLogin]
 
-            const response = axios.get('https://apigenerator.dronahq.com/api/T4woaltu/Users')
+            const response = axios.get(api)
                 .then(function (response) {
                     const verification = response.data.filter((item: { Email: string }) => item.Email == values.emailAnddressLogin)
 
