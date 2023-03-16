@@ -11,6 +11,20 @@ export const LastWatch = () => {
 
     const localData = window.localStorage.getItem('lastWatchList')
 
+    let arrayMovies = JSON.parse(localData != null ? localData : '')
+
+    let reduced: movie[] = [];
+
+    arrayMovies.forEach((item: movie) => {
+        let duplicated = reduced.findIndex(redItem => {
+            return item.id == redItem.id;
+        }) > -1;
+
+        if (!duplicated) {
+            reduced.push(item);
+        }
+    });
+
     return (
         <div className="MoviesPageContainer">
             <div className="container">
@@ -23,8 +37,8 @@ export const LastWatch = () => {
                 </section>
 
                 {localData == null && <NotFound />}
-                {!isExpanded && localData != null ? <MoviesNoExpandedSection data={JSON.parse(localData)} /> : null}
-                {isExpanded && localData != null ? <MoviesExpandedSection data={JSON.parse(localData)} /> : null}
+                {!isExpanded && localData != null ? <MoviesNoExpandedSection data={reduced} /> : null}
+                {isExpanded && localData != null ? <MoviesExpandedSection data={reduced} /> : null}
             </div>
             <Footer />
         </div>
