@@ -33,6 +33,8 @@ export const Navbar = () => {
     function Logout() {
         localStorage.setItem('user', '[]')
         store.dispatch(setInforUser([]))
+        localStorage.setItem('Favorites', '[]')
+        localStorage.setItem('lastWatchList', '[]')
         window.location.reload()
     }
 
