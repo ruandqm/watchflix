@@ -27,7 +27,7 @@ export const Movie: React.FC = () => {
         return moviesData
     })
 
-    const imageUrl = `https://image.tmdb.org/t/p/w1280/${data ? data.results.backdrop : ''}`
+    const imageUrl = data ? `https://image.tmdb.org/t/p/w1280/${data.results.backdrop}` : ''
 
     function addFavorites() {
         Logout()
@@ -43,18 +43,18 @@ export const Movie: React.FC = () => {
         }
 
         if (user.inforUser.length > 0) {
-        if (favotiresLocal != null && favotiresLocal.length > 0) {
-            let inforsFavorites = JSON.parse(favotiresLocal)
-            inforsFavorites.push(arrayInfors)
-            localStorage.setItem('Favorites', JSON.stringify(inforsFavorites))
-        }
+            if (favotiresLocal != null && favotiresLocal.length > 0) {
+                let inforsFavorites = JSON.parse(favotiresLocal)
+                inforsFavorites.push(arrayInfors)
+                localStorage.setItem('Favorites', JSON.stringify(inforsFavorites))
+            }
 
-        else {
-            let arrayInfor = [arrayInfors]
-            localStorage.setItem('Favorites', JSON.stringify(arrayInfor))
-        }
+            else {
+                let arrayInfor = [arrayInfors]
+                localStorage.setItem('Favorites', JSON.stringify(arrayInfor))
+            }
 
-        store.dispatch(setFavoriteUser(1))
+            store.dispatch(setFavoriteUser(1))
         }
     }
 
@@ -92,8 +92,6 @@ export const Movie: React.FC = () => {
                 }
             })
 
-            console.log(arrayFilter)
-
             if (arrayFilter.length > 0) {
                 store.dispatch(setFavoriteUser(1))
             }
@@ -113,32 +111,34 @@ export const Movie: React.FC = () => {
                     <Navbar />
                 </div>
                 <section className='Movie_Section'>
-                    <div className='Movie_SectionInfor'>
-                        <div className='SectionInfor_Left'>
-                            <img src={imageUrl} alt="" />
-                            <div className='ButtonPlay'>
-                                <button>
-                                    <img src={Play} alt="IconPlay" height={'38%'} />
-                                </button>
+                    {data != undefined && (
+                        <div className='Movie_SectionInfor'>
+                            <div className='SectionInfor_Left'>
+                                <img src={imageUrl} alt="" />
+                                <div className='ButtonPlay'>
+                                    <button>
+                                        <img src={Play} alt="IconPlay" height={'38%'} />
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <div className='SectionInfor_Right'>
-                            {data != undefined && (
+                            <div className='SectionInfor_Right'>
+
                                 <>
                                     <h2>{data.results.title}</h2>
                                     <p>{data?.results.overview}</p>
                                     <article>
                                         <div className='genres'>Genres: {data != undefined ? data.results.genre.map((genre: genre, index: number) => {
-                                            return <div className="genre"> <span>{genre.name}</span></div>
+                                            return <div className="genre" key={index}> <span>{genre.name}</span></div>
                                         }) : null}</div>
                                         <p>Duration: {data.results.runtime}</p>
                                         <p>Ratings: {data.results.rate.toFixed(1)}</p>
                                     </article>
                                     <img src={user.favorite == 0 ? Heart : HearRed} alt="heart" height={'32px'} onClick={user.favorite == 0 ? addFavorites : removeFavorites} />
                                 </>
-                            )}
+
+                            </div>
                         </div>
-                    </div>
+                    )}
                     <div className='trailersSection'>
                         <h2>Trailers</h2>
                         <div className='groupBoxTrailers'>
@@ -146,7 +146,9 @@ export const Movie: React.FC = () => {
                                 <BoxTrailer url={item.key} index={index + 1} key={item.key} />
                             ))}
                         </div>
+
                     </div>
+
                 </section>
                 <Footer />
             </div>
