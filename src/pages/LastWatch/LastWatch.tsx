@@ -43,11 +43,11 @@ export const LastWatch = () => {
                     <Navbar />
                 </section>
                 <section className="moviesHeader">
-                    <h2>Movies</h2>
+                    <h2>Last Watch</h2>
                     <span className='expand' onClick={() => setIsExpanded(!isExpanded)}>{isExpanded ? 'Ver Menos' : 'Ver Mais'}</span>
                 </section>
 
-                {localData == null && <NotFound />}
+                {localData == null || localData.length == 0 ? <NotFound /> : ''}
                 {!isExpanded && data != null ? <MoviesNoExpandedSection data={data} /> : null}
                 {isExpanded && data != null ? <MoviesExpandedSection data={data} /> : null}
             </div>
